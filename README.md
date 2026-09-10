@@ -7,13 +7,22 @@ Extract filenames from many files, folders, or ZIP archives. Copy or download TX
 
 ไฟล์ไม่ออกจากเครื่อง · Files never leave this device.
 
+## ลิงก์
+
+| | |
+|---|---|
+| GitHub (public) | https://github.com/khunpoom/filename-extractor |
+| เว็บบน Vercel | https://filename-extractor-khunpoom.vercel.app |
+| GitHub Pages | https://khunpoom.github.io/filename-extractor/ |
+| ดาวน์โหลด Namely.exe | https://github.com/khunpoom/filename-extractor/releases/download/v1.0.0/Namely.exe |
+
 ## ภาษา / Languages
 
 ไทย และ English — สลับได้ที่มุมบนขวา (เว็บ) หรือตามภาษาของ Windows (`.exe`)
 
 ## เว็บ
 
-เปิด `index.html` หรือเว็บที่ deploy บน Vercel แล้วลากไฟล์หรือโฟลเดอร์มาวาง ไม่ต้องติดตั้ง
+เปิดเว็บแล้วลากไฟล์หรือโฟลเดอร์มาวาง ไม่ต้องติดตั้ง
 
 - ชื่อพร้อมนามสกุล / ชื่ออย่างเดียว / นามสกุล / พาธย่อย
 - อ่านรายชื่อข้างใน `.zip` โดยไม่ต้องแตกไฟล์
@@ -22,9 +31,11 @@ Extract filenames from many files, folders, or ZIP archives. Copy or download TX
 
 ## Windows `.exe`
 
-1. คอมไพล์จากโฟลเดอร์ `desktop/`
-2. ดับเบิลคลิก `Namely.exe` เลือกโฟลเดอร์ แล้วบันทึกรายชื่อ
+1. ดาวน์โหลด [`Namely.exe`](https://github.com/khunpoom/filename-extractor/releases/download/v1.0.0/Namely.exe)
+2. ดับเบิลคลิก เลือกโฟลเดอร์ แล้วบันทึกรายชื่อ
 3. หรือลากโฟลเดอร์มาวางบนไอคอนโปรแกรม — จะได้ไฟล์ `รายชื่อไฟล์.txt` ในโฟลเดอร์นั้น
+
+คอมไพล์เอง:
 
 ```bash
 cd desktop

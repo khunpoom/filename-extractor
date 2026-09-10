@@ -37,7 +37,7 @@ const I18N = {
     how2: "ถ้าเป็นไฟล์ ZIP สามารถอ่านรายชื่อข้างในได้โดยไม่ต้องแตกไฟล์",
     how3: "เลือกว่ารายชื่อจะเป็นชื่ออย่างเดียว นามสกุล หรือพาธ แล้วคัดลอกหรือดาวน์โหลด",
     desktopTitle: "โปรแกรม Windows",
-    desktopBody: "ดาวน์โหลดซอร์สแล้วคอมไพล์ Namely.exe หรือลากโฟลเดอร์มาวางบนไอคอนโปรแกรม",
+    desktopBody: "ดาวน์โหลด .exe แล้วดับเบิลคลิกบนเครื่อง Windows — เลือกโฟลเดอร์ แล้วได้ไฟล์รายชื่อทันที หรือลากโฟลเดอร์มาวางบนไอคอนโปรแกรม",
     github: "ซอร์สโค้ดบน GitHub",
     footer: "ทำงานทั้งเครื่อง · ไม่มีเซิร์ฟเวอร์เก็บไฟล์",
     names: "ชื่อ",
@@ -80,7 +80,7 @@ const I18N = {
     how2: "ZIP archives can list inner names without unpacking.",
     how3: "Choose name, stem, or path, then copy or download the list.",
     desktopTitle: "Windows app",
-    desktopBody: "Build Namely.exe from the desktop folder, or drag a folder onto the program icon.",
+    desktopBody: "Download the .exe and double-click on Windows — pick a folder to save the name list, or drag a folder onto the program icon.",
     github: "Source on GitHub",
     footer: "Runs on your device · no files uploaded",
     names: "names",
@@ -258,7 +258,13 @@ function render() {
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" }[c]));
+  return String(s).replace(/[&<>"']/g, (c) => {
+    if (c === '&') return '&amp;';
+    if (c === '<') return '&lt;';
+    if (c === '>') return '&gt;';
+    if (c === '"') return '&quot;';
+    return '&#39;';
+  });
 }
 
 function download(name, content, mime) {
