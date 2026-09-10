@@ -1,0 +1,9 @@
+node_modules
+.output
+.vinxi
+.vercel
+.nitro
+dist
+*.log
+.DS_Store
+*.exe
