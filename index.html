@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Namely — ดึงชื่อไฟล์</title>
+    <meta
+      name="description"
+      content="ดึงชื่อไฟล์จากหลายไฟล์หรือทั้งโฟลเดอร์ ส่งออก TXT CSV JSON — ไฟล์ไม่ออกจากเครื่อง"
+    />
+    <meta name="theme-color" content="#F6F4EF" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="paper">
+      <header class="top">
+        <div class="brand">
+          <span class="mark" aria-hidden="true">N</span>
+          <div>
+            <strong>Namely</strong>
+            <small data-i18n="brandSub">ดึงชื่อไฟล์</small>
+          </div>
+        </div>
+        <div class="top-right">
+          <span class="chip" data-i18n="privacy">ไฟล์ไม่ออกจากเครื่อง</span>
+          <div class="lang" role="group" aria-label="language">
+            <button type="button" data-lang="th" class="on">ไทย</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <h1 data-i18n="tagline">ลากไฟล์มา ได้รายชื่อทันที</h1>
+          <p data-i18n="subtitle">
+            ดึงชื่อไฟล์จากหลายไฟล์หรือทั้งโฟลเดอร์ ส่งออกเป็นข้อความ CSV หรือ JSON — ไฟล์ไม่ออกจากเครื่องคุณ
+          </p>
+        </section>
+
+        <input id="filePick" type="file" multiple hidden />
+        <input id="folderPick" type="file" multiple webkitdirectory directory hidden />
+
+        <section id="drop" class="drop">
+          <div class="drop-inner">
+            <div class="icon-wrap" aria-hidden="true"></div>
+            <p class="drop-title" data-i18n="dropTitle">วางไฟล์หรือโฟลเดอร์ที่นี่</p>
+            <p class="muted" data-i18n="dropHint">ลากมาวาง หรือเลือกจากเครื่อง</p>
+            <div class="actions">
+              <button type="button" class="btn" id="btnFiles" data-i18n="pickFiles">เลือกไฟล์</button>
+              <button type="button" class="btn btn-outline" id="btnFolder" data-i18n="pickFolder">เลือกโฟลเดอร์</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results" class="results hidden">
+          <div class="meta-row">
+            <span class="chip accent" id="countChip"></span>
+            <button type="button" class="btn btn-ghost" id="btnClear" data-i18n="clear">ล้างรายการ</button>
+          </div>
+          <div class="panel">
+            <div class="grid">
+              <label>
+                <span data-i18n="field">ดึงเป็น</span>
+                <select id="field">
+                  <option value="name" data-i18n="fieldName">ชื่อพร้อมนามสกุล</option>
+                  <option value="stem" data-i18n="fieldStem">ชื่ออย่างเดียว</option>
+                  <option value="ext" data-i18n="fieldExt">นามสกุล</option>
+                  <option value="relative" data-i18n="fieldRelative">พาธย่อย</option>
+                </select>
+              </label>
+              <label>
+                <span data-i18n="sort">เรียง</span>
+                <select id="sort">
+                  <option value="original" data-i18n="sortOriginal">ตามที่เลือก</option>
+                  <option value="name" data-i18n="sortName">ชื่อ</option>
+                  <option value="ext" data-i18n="sortExt">นามสกุล</option>
+                  <option value="size" data-i18n="sortSize">ขนาด</option>
+                </select>
+              </label>
+              <label>
+                <span data-i18n="prefix">คำนำ</span>
+                <input id="prefix" type="text" />
+              </label>
+              <label>
+                <span data-i18n="suffix">คำตาม</span>
+                <input id="suffix" type="text" />
+              </label>
+            </div>
+            <div class="toggles">
+              <input id="search" type="search" data-i18n-placeholder="search" placeholder="ค้นชื่อไฟล์…" />
+              <label class="check"><input id="numbered" type="checkbox" /> <span data-i18n="numbered">ใส่เลขลำดับ</span></label>
+              <label class="check"><input id="unique" type="checkbox" /> <span data-i18n="unique">ไม่ซ้ำ</span></label>
+              <label class="check"><input id="zipPeek" type="checkbox" checked /> <span data-i18n="zipToggle">อ่านชื่อใน ZIP</span></label>
+            </div>
+            <div class="actions">
+              <button type="button" class="btn" id="btnCopy" data-i18n="copy">คัดลอก</button>
+              <button type="button" class="btn btn-outline" id="btnTxt" data-i18n="txt">ข้อความ .txt</button>
+              <button type="button" class="btn btn-outline" id="btnCsv" data-i18n="csv">CSV (Excel)</button>
+              <button type="button" class="btn btn-outline" id="btnJson">JSON</button>
+            </div>
+          </div>
+          <div class="panel table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th data-i18n="colName">ชื่อไฟล์</th>
+                  <th data-i18n="colExt">นามสกุล</th>
+                  <th data-i18n="colSize">ขนาด</th>
+                  <th data-i18n="colPath">พาธ</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+          <pre id="preview" class="preview"></pre>
+        </section>
+
+        <section id="how" class="how">
+          <article><b>01</b><p data-i18n="how1">เลือกหลายไฟล์ หรือทั้งโฟลเดอร์ (รวมโฟลเดอร์ย่อย)</p></article>
+          <article><b>02</b><p data-i18n="how2">ถ้าเป็นไฟล์ ZIP สามารถอ่านรายชื่อข้างในได้โดยไม่ต้องแตกไฟล์</p></article>
+          <article><b>03</b><p data-i18n="how3">เลือกว่ารายชื่อจะเป็นชื่ออย่างเดียว นามสกุล หรือพาธ แล้วคัดลอกหรือดาวน์โหลด</p></article>
+        </section>
+
+        <section class="desktop">
+          <div>
+            <p class="eyebrow" data-i18n="desktopTitle">โปรแกรม Windows</p>
+            <h2>Namely.exe</h2>
+            <p data-i18n="desktopBody">
+              ดาวน์โหลด .exe แล้วดับเบิลคลิกบนเครื่อง Windows — เลือกโฟลเดอร์ แล้วได้ไฟล์รายชื่อทันที หรือลากโฟลเดอร์มาวางบนไอคอนโปรแกรม
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn light" href="https://github.com/khunpoom/filename-extractor" data-i18n="github">ซอร์สโค้ดบน GitHub</a>
+          </div>
+        </section>
+      </main>
+      <footer data-i18n="footer">ทำงานทั้งเครื่อง · ไม่มีเซิร์ฟเวอร์เก็บไฟล์</footer>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
