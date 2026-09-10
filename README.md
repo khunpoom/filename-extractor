@@ -9,12 +9,12 @@ Extract filenames from many files, folders, or ZIP archives. Copy or download TX
 
 ## ลิงก์
 
-| | |
-|---|---|
-| GitHub (public) | https://github.com/khunpoom/filename-extractor |
-| เว็บบน Vercel | https://filename-extractor-khunpoom.vercel.app |
-| GitHub Pages | https://khunpoom.github.io/filename-extractor/ |
-| ดาวน์โหลด Namely.exe | https://github.com/khunpoom/filename-extractor/releases/download/v1.0.0/Namely.exe |
+- GitHub (public): https://github.com/khunpoom/filename-extractor
+- เว็บบน Vercel: https://filename-extractor-khunpoom.vercel.app
+- ดาวน์โหลด Namely.exe: https://github.com/khunpoom/filename-extractor/releases/download/v1.0.0/Namely.exe
+
+ถ้าหน้า Vercel ขึ้นล็อกอิน ให้ปิด **Deployment Protection** ที่  
+Vercel Dashboard → Project `filename-extractor` → Settings → Deployment Protection → ปิด Vercel Authentication
 
 ## ภาษา / Languages
 
